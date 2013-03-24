@@ -1,0 +1,18 @@
+{
+  "name": "codepad",
+  "preferGlobal": "false",
+  "author" : "Jay Zeng <jayzeng@jay-zeng.com>",
+  "description": "code sharing tool built on top of gist",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pksunkara/octonode.git"
+  },
+  "dependencies": {
+    "octonode": "0.3.0"
+  },
+  "engines": {
+    "node": ">=0.8"
+  },
+  "private": "true"
+}
