@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  for gist in gists
+    ul
+      li
+        p a(href='#{gist.url}') #{gist.description}
+        p is private gist: #{gist.public}
