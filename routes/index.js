@@ -33,3 +33,7 @@ exports.list = function(req,res) {
 
   });
 }
+
+exports.code = function(req,res) {
+  res.render('codepad', {});
+}
