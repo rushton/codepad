@@ -17,7 +17,16 @@ html(lang="en")
               return x;
           }
     script(src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js")
+    script(src="/socket.io/socket.io.js")
     script(type='text/javascript')
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
       editor.getSession().setMode("ace/mode/javascript");
+
+      editor.getSession().selection.on('changeSelection', function(e) {
+          // Trigger event when code is changed
+          var socket = io.connect('http://localhost:3000');
+          socket.on('code', function (data) {
+            socket.emit('code', { code: editor.getValue() });
+          });
+      });

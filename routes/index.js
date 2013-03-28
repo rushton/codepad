@@ -2,9 +2,9 @@
 /*
  * GET home page.
  */
-var qs = require('querystring')
-    ,url = require('url')
-    ,qs = require('querystring')
+var qs      = require('querystring')
+    ,url    = require('url')
+    ,qs     = require('querystring')
     ,github = require('octonode');
 
 // Build the authorization config and url

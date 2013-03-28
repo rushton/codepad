@@ -4,9 +4,9 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path');
+  , routes  = require('./routes')
+  , http    = require('http')
+  , path    = require('path');
 
 var app = express();
 
@@ -32,6 +32,16 @@ app.get('/', routes.index);
 app.get('/list', routes.list);
 app.get('/code', routes.code);
 
-http.createServer(app).listen(app.get('port'), function() {
+server = http.createServer(app).listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
+});
+
+// socket.io binding
+var io = require('socket.io').listen(server);
+
+// broadcast code snippet
+io.sockets.on('connection', function (socket) {
+  socket.emit('code', function(data) {
+    socket.broadcast.emit('code',data);
+  });
 });
