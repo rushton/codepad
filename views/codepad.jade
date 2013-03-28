@@ -25,12 +25,18 @@ html(lang="en")
 
       editorSession.setMode("ace/mode/javascript");
 
-      editorSession.selection.on('changeSelection', function(e) {
-          // Trigger event when code is changed
-          var socket = io.connect('http://localhost:3000');
-          socket.on('code', function (data) {
-            var savedValue = editor.getValue();
-            socket.emit('code', { code: savedValue });
-            editorSession.setValue(savedValue);
-          });
+      // Trigger event when code is changed
+      var hash = document.location.hash.replace('#', '');
+      var socket = io.connect('http://localhost:3000');
+
+      socket.emit('hash', {shorturl: hash});
+
+      editorSession.on('change', function(e) {
+          var savedValue = editor.getValue();
+          socket.emit('newcode', { code: savedValue });
+      });
+
+      socket.on('code', function (data) {
+          editorSession.setValue(data);
+          console.log(data);
       });

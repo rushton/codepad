@@ -40,7 +40,14 @@ var io = require('socket.io').listen(server);
 
 // broadcast code snippet
 io.sockets.on('connection', function (socket) {
-  socket.emit('code', function(data) {
-    socket.broadcast.emit('code',data);
-  });
+    socket.on('hash', function(url) {
+        socket.join(url);
+        socket.set('hash', url);
+    });
+
+    socket.on('newcode', function (data) {
+        socket.get('hash', function(err, url) {
+            io.sockets.in(url).emit('code',data);
+        });
+    });
 });

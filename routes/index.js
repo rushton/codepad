@@ -5,6 +5,7 @@
 var qs      = require('querystring')
     ,url    = require('url')
     ,qs     = require('querystring')
+    ,hash   = require('../util/shorturl.js')
     ,github = require('octonode');
 
 // Build the authorization config and url
@@ -14,8 +15,11 @@ var auth_url = github.auth.config({
 }).login(['user', 'repo', 'gist']);
 
 exports.index = function(req, res) {
-  res.writeHead(301, {'Content-Type': 'text/plain', 'Location': auth_url})
-  res.end('Redirecting to ' + auth_url);
+  var shortUrl = hash.getShortUrl();
+  res.render('index', {url: shortUrl});
+
+  //res.writeHead(301, {'Content-Type': 'text/plain', 'Location': auth_url})
+  //res.end('Redirecting to ' + auth_url);
 };
 
 exports.list = function(req,res) {
