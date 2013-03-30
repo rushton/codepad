@@ -32,11 +32,11 @@ html(lang="en")
       socket.emit('hash', {shorturl: hash});
 
       editorSession.on('change', function(e) {
+          e.preventDefault();
           var savedValue = editor.getValue();
-          socket.emit('newcode', { code: savedValue });
+          socket.emit('code', { code: savedValue });
       });
 
       socket.on('code', function (data) {
-          editorSession.setValue(data);
-          console.log(data);
+          editorSession.setValue(data.code);
       });

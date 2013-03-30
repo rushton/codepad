@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
         socket.set('hash', url);
     });
 
-    socket.on('newcode', function (data) {
+    socket.on('code', function (data) {
         socket.get('hash', function(err, url) {
             io.sockets.in(url).emit('code',data);
         });
