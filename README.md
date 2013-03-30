@@ -1,4 +1,4 @@
-codepad
+Codepad
 =======
 
 Real time collaboration code sharing tool
@@ -10,3 +10,8 @@ Dependencies
 - Express    (https://npmjs.org/package/express)
 - Socket.io  (https://github.com/LearnBoost/socket.io)
 - GitHub API (http://developer.github.com/v3/)
+
+How to run
+=======
+- npm install
+- ./node_modules/nodemon/nodemon.js app.js
