@@ -27,7 +27,12 @@ html(lang="en")
 
       // Trigger event when code is changed
       var hash = document.location.hash.replace('#', '');
-      var socket = io.connect('http://localhost:3000');
+
+      var location = document.location;
+      var hash = location.hash.replace('#', '');
+      var host = location.host.split(':')[0];
+
+      var socket = io.connect('http://' + host + ':3000');
 
       socket.emit('hash', {shorturl: hash});
 
