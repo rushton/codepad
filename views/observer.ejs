@@ -24,6 +24,7 @@
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
       var editorSession = editor.getSession();
+      editor.setReadOnly(true);
       editorSession.setMode("ace/mode/javascript");
 
       var socket = io.connect(document.location.origin);
