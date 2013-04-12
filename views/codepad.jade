@@ -28,9 +28,9 @@ html(lang="en")
       // Trigger event when code is changed
       var hash = document.location.hash.replace('#', '');
 
-      var location = document.location;
-      var hash = location.hash.replace('#', '');
-      var host = location.host.split(':')[0];
+      var loc = document.location;
+      var hash = loc.hash.replace('#', '');
+      var host = loc.host.split(':')[0];
 
       var socket = io.connect('http://' + host + ':3000');
 
