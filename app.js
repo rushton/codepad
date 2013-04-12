@@ -12,7 +12,7 @@ var app = express();
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -30,13 +30,14 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/list', routes.list);
 app.get('/code', routes.code);
+app.get('/observe/:hash', routes.observe);
 
 server = http.createServer(app).listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
 });
 
 // socket.io binding
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server,{log:false});
 
 // broadcast code snippet
 io.sockets.on('connection', function (socket) {

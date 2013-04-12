@@ -39,5 +39,10 @@ exports.list = function(req,res) {
 }
 
 exports.code = function(req,res) {
-  res.render('codepad', {});
+  var shortUrl = hash.getShortUrl();
+  res.render('coder', {hash: shortUrl});
+}
+
+exports.observe = function(req,res) {
+  res.render('observer', {hash: req.params.hash});
 }

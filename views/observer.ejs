@@ -1,0 +1,39 @@
+<!html>
+<html lang="en">
+  <head>
+    <title>hello world</title>
+    <style type="text/css">
+      #editor {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+      }
+    </style>
+    <body>
+      <div id="editor">
+        function foo(items) {
+            var x = "All this is syntax highlighted";
+            return x;
+        }
+      </div>
+      <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script type="text/javascript">
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/monokai");
+      var editorSession = editor.getSession();
+      editorSession.setMode("ace/mode/javascript");
+
+      var socket = io.connect('http://' + document.location.host);
+
+      socket.emit('hash', "<%= hash %>");
+
+      socket.on('code', function (data) {
+      console.log(data);
+          editorSession.setValue(data.code);
+      });
+      </script>
+    </body>
+</html>
