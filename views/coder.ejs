@@ -28,12 +28,14 @@
       editorSession.setMode("ace/mode/javascript");
 
       // Trigger event when code is changed
-      var host = document.location.host;
+      var socket = io.connect(document.location.origin);
+
       var hash = "<%= hash %>";
-      console.log(hash);
-      var socket = io.connect('http://' + host);
+      // connect to our "room"
       socket.emit('hash', hash);
 
+      var observerLink = document.location.origin + "/observe/" + hash;
+      console.log(observerLink);
       editorSession.on('change', function(e) {
           e.preventDefault();
           var savedValue = editor.getValue();

@@ -26,12 +26,11 @@
       var editorSession = editor.getSession();
       editorSession.setMode("ace/mode/javascript");
 
-      var socket = io.connect('http://' + document.location.host);
+      var socket = io.connect(document.location.origin);
 
       socket.emit('hash', "<%= hash %>");
 
       socket.on('code', function (data) {
-      console.log(data);
           editorSession.setValue(data.code);
       });
       </script>
